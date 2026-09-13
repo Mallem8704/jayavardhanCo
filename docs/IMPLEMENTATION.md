@@ -1,16 +1,21 @@
-# Implementation plan
+# Implementation and route map
 
-1. Inspect the workspace and source website; preserve an existing stack. Workspace was empty, so use Next.js App Router, TypeScript, Tailwind CSS and Lucide.
-2. Centralise confirmed firm identity and categories in a typed content module; keep unverified facts in an internal checklist.
-3. Build a responsive editorial home page, service directory and category pages with consistent navigation, metadata and engagement guidance.
-4. Validate production export, type safety, links, mobile navigation and responsive layout before handoff.
+## Completed implementation
 
-# Route map
+1. Retained the requested Next.js App Router, TypeScript, Tailwind CSS and Lucide foundation.
+2. Built the six-section editorial homepage: architectural hero, two-column service index, needs-to-services guide, enquiry preparation, factual About preview and navy contact invitation.
+3. Expanded all eight service pages with unique introductions, understanding, situations, discussion topics, three FAQs, related links and a preselected contact CTA.
+4. Implemented About, optional verified partner profiles, the complete contact form, privacy notice, server validation and a configurable delivery boundary.
+5. Added canonical metadata, sitemap, robots, locally rendered branded social image, verified structured data, security headers and default staging noindex.
+6. Added tests and operational documentation. This version is local only: the user explicitly prohibited deployment without a separate request.
+
+## Routes
 
 | Route | Purpose |
 | --- | --- |
-| `/` | Firm introduction, eight practice areas, engagement guidance |
-| `/services/` | Complete category directory |
+| `/` | Six-section homepage |
+| `/about/` | Verified firm/professional information and areas of practice |
+| `/services/` | Eight-service editorial index |
 | `/services/audit-assurance/` | Audit & Assurance |
 | `/services/taxation/` | Taxation |
 | `/services/gst/` | GST |
@@ -19,16 +24,20 @@
 | `/services/transfer-pricing-fema/` | Transfer Pricing & FEMA |
 | `/services/startup-advisory/` | Startup Advisory |
 | `/services/virtual-cfo-business-advisory/` | Virtual CFO & Business Advisory |
-| Unmatched routes | Custom 404 |
+| `/contact/?service=gst` | Enquiry form with validated service preselection |
+| `/privacy/` | Actual enquiry-processing notice |
+| `/api/enquiry/` | POST-only server enquiry integration |
+| `/sitemap.xml` | Canonical public route inventory |
+| `/robots.txt` | Environment-specific crawler policy |
+| `/opengraph-image` | Branded 1200 × 630 PNG |
+| Unmatched routes | 404 page |
 
-# Architecture
+## Content and component architecture
 
-`lib/content.ts` owns the public identity, typed service records and shared engagement text. Category pages are statically generated from those records. Server components are the default; only the responsive navigation is a client component. CSS tokens establish the theme; Tailwind v4 is configured for extension. System typography avoids third-party font requests. The typographic monogram is a design treatment, not an asserted existing firm logo.
+`lib/content.ts` is the typed public-content entry point. It re-exports `serviceDetails` from `lib/service-details.ts`, where each service has structured educational copy, discussion topics, FAQs and related slugs. `partnerProfiles` supports optional verified profiles and is empty because partner status and biographies have not been confirmed. The confirmed name/designation are displayed separately without assigning an unverified role.
 
-No database or contact API is needed for the verified content. Do not add a contact form until its recipient, privacy handling and delivery integration are verified. No submissions are simulated. `docs/` is internal source documentation and is not included in the public static export.
+Server components render content, metadata and optional contact details. Client code is limited to responsive navigation, the enquiry form and the error boundary. Fonts are bundled locally through `next/font/local`. The architectural motif is decorative SVG geometry, not a professional emblem or purported office image.
 
-## Shared visual system extension
+The site now requires the Next.js Node server; a static export cannot serve the enquiry endpoint. The API validates and normalises fields, bounds payload size, rejects cross-origin submissions, checks a honeypot, applies atomic shared Redis limits and deduplication, and constructs a plain-text email. No provider is enabled in this workspace. Missing configuration returns an honest unavailable state; tests use provider doubles and never send email.
 
-The current design uses the exact requested palette and locally hosted Inter/Source Serif 4. See `docs/VISUAL-SYSTEM.md` for tokens, responsive behavior, components and future form integration. The wordmark is text only; the earlier monogram has been removed.
-
-Additional routes: `/about/` for confirmed identity and practice context; `/contact/` for the confirmed professional name, office address, mailto link and telephone link. Navigation is Home | About | Services | Contact, with the primary action Discuss Your Requirements.
+Internal `docs/`, tests and environment files are not public routes. Keep application source inaccessible to the public web server.

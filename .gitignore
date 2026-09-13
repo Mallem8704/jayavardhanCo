@@ -6,3 +6,5 @@ out/
 *.tsbuildinfo
 .sites-runtime/
 .npm-cache/
+.vercel/
+.openai/

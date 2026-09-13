@@ -1,0 +1,9 @@
+.git
+.next
+out
+.npm-cache
+.sites-runtime
+.openai
+.env*
+docs
+tests

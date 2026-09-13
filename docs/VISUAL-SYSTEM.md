@@ -1,39 +1,30 @@
 # Visual system and shared components
 
-## Tokens
+## Tokens and layout
 
-- Navy `#14283F`, ivory `#F7F5F0`, white `#FFFFFF`, body `#283340`, gold `#A08352`, border `#DDDCD6`.
-- Secondary text `#52606E`; control borders `#74808B`; error text `#9B2828`. Gold is reserved for decorative rules and underline accents, never small text.
-- Source Serif 4 regular/italic and Inter 400/500/600 are bundled WOFF2 assets using next/font/local. No runtime font service requests.
-- Content max 1240px; 4px corners; 180ms transitions; mobile navigation below 1100px; stacked editorial sections below 700px.
-- Reduced-motion mode removes transitions and smooth scrolling. No entrance animations or delayed content.
+Exact palette: navy #14283F, ivory #F7F5F0, white #FFFFFF, charcoal #283340, gold #A08352, border #DDDCD6. Secondary text uses #52606E; control borders #74808B; errors #9B2828. Gold is decorative, not small text.
 
-## Component inventory
+Source Serif 4 regular/italic and Inter 400/500/600 are bundled with next/font/local. Content is capped at 1240px, with 4px corners and 180ms interactions. Reduced-motion mode removes transitions and smooth scrolling. No intro loader, autoplay media or scroll interception is present.
 
-- `components/header.tsx`: text wordmark, four primary links, independent Services link and disclosure button, all eight categories, mobile disclosure and requirements CTA. Enter/Space activate native buttons; Tab follows links; Escape closes and restores toggle focus. Outside pointer and focus departure close menus. Navigation is a disclosure, not an ARIA application menu.
-- `components/footer.tsx`: shared footer and optional verified contact renderer.
-- `components/ui.tsx`: Button, ButtonLink, TextLink, SectionHeading and Breadcrumbs.
-- `components/service-grid.tsx`: ServicePreview and ServiceGrid from the typed content model.
-- `components/engagement-note.tsx`: consistent scope and independence guidance.
-- `components/form-controls.tsx`: TextInput, Textarea, Select and Checkbox; required associated labels, optional hint/error IDs, aria-invalid, required state, disabled/read-only states, native keyboard interaction and visible focus. Use Button for form submission and supply type="submit" explicitly.
+## Components
 
-## Form integration
+- Header: text wordmark, four primary links, Services disclosure and requirements CTA. Native buttons support Enter/Space, normal Tab order, Escape close/focus return and outside-focus dismissal. Mobile menus are disclosures, not modal dialogs.
+- Hero: navy editorial surface, controlled sentence wrapping, ivory primary CTA, secondary service link and a framed ivory architectural plate. The SVG and its captions are decorative and hidden from assistive technology.
+- ServicePreview/ServiceGrid: numbered two-column editorial index on desktop, single column on mobile.
+- SectionHeading, Breadcrumbs, Button, ButtonLink, TextLink: shared semantics and consistent spacing/focus.
+- EngagementNote: shared acceptance and independence limitations.
+- EnquiryForm: all required fields, validated service preselection, inline errors, status announcements, request locking, preserved entries and honest unavailability when not configured.
+- TextInput, Textarea, Select, Checkbox: associated labels, hint/error IDs, required state, disabled/read-only support and visible focus.
+- Footer: eight services, navigation, privacy and confirmed contact details only.
 
-The shared form controls are ready to compose, but no enquiry form is exposed without a delivery backend and agreed data handling. Contact uses confirmed mailto and tel links. These open the visitor's email/phone application; they do not claim a message has been sent. Backend validation and success/error reporting must accompany any future submission endpoint.
+The service pages use native details/summary FAQs and a desktop enquiry sidebar. It becomes static at narrower widths; focused fields and headings are not covered by sticky navigation.
 
-Example:
+## Verification evidence
 
-```tsx
-<TextInput id="email" name="email" label="Email address" type="email" autoComplete="email" required hint="Use the address where you want a reply." error={errors.email} />
-```
+The current hero was visually inspected at 375, 768, 1024 and 1440px. At all four widths, measured document scroll width equalled client width. The mobile layout keeps the copy and CTAs before the illustration.
 
-Do not use placeholders in place of labels. Keep unique field IDs. Validate on the server when a delivery backend is introduced.
+The earlier shared-navigation pass verified Enter, Tab, Return and Escape behavior, including restoring focus to mobile/service toggles. Contact details use mailto:info@cajvr.com and tel:+918766728514; no calls were made.
 
-## Validation — 13 September 2026
+Contrast measurements: charcoal/ivory 11.77:1; secondary text/ivory 5.92:1; white/navy 14.95:1; light secondary/navy 10.87:1; control border/white 4.04:1; error text/white 7.70:1.
 
-- Production static build and TypeScript check pass for Home, About, Contact, directory and eight category pages.
-- Browser checked at desktop 1440px, mobile 390px and narrow 320px. Measured document scroll width equals client width on tested Contact and category pages.
-- Desktop service disclosure tested with Enter, Tab and Return; category navigation succeeded. Mobile service and navigation disclosures tested; Escape restored focus to the matching toggle.
-- Text contrast: charcoal/ivory 11.77:1; secondary text/ivory 5.92:1; white/navy 14.95:1; secondary light/navy 10.87:1. Control border/white 4.04:1; error text/white 7.70:1. Gold is decorative only.
-- Verified contact links point to mailto:info@cajvr.com and tel:+918766728514. No messages or calls were initiated during checks.
-- Form controls are typed reusable primitives; end-to-end form submission is not implemented or claimed.
+Server and validation tests use provider doubles. Live email receipt requires configured credentials and is not claimed by those tests. See the launch checklist for outstanding owner/provider work.

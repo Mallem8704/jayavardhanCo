@@ -35,3 +35,18 @@ export type VerifiedContact = { email?: string; phone?: { display: string; href:
 // Confirmed directly by the user, 13 September 2026.
 export const contact: VerifiedContact = { email: 'info@cajvr.com', phone: { display: '+91 87667 28514', href: 'tel:+918766728514' }, address: '703, Manjeera Trinity Corporate, KPHB, Hyderabad - 500 072.' };
 export const professional = { name: 'CA Anumula Jayavardhan Rao', designation: 'Chartered Accountant' } as const;
+
+export { serviceDetails } from './service-details.ts';
+export type PartnerProfile = { name: string; designation: string; biography?: string };
+// A name and designation are confirmed, but partner status/biographies are not.
+export const partnerProfiles: readonly PartnerProfile[] = [];
+export const visitorNeeds = [
+  ['Understand audit requirements', 'audit-assurance'],
+  ['Discuss tax matters', 'taxation'],
+  ['Navigate GST requirements', 'gst'],
+  ['Organise financial records', 'accounting-bookkeeping'],
+  ['Understand corporate obligations', 'corporate-compliance'],
+  ['Discuss cross-border matters', 'transfer-pricing-fema'],
+  ['Plan a new business', 'startup-advisory'],
+  ['Improve financial decision-making', 'virtual-cfo-business-advisory'],
+] as const;
