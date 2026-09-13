@@ -1,21 +1,32 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
-import { firm } from '@/lib/content';
-
+import { useEffect, useRef, useState } from 'react';
+import { ChevronDown, Menu, X } from 'lucide-react';
+import { firm, navigation, services } from '@/lib/content';
+import { ButtonLink } from '@/components/ui';
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const toggle = useRef<HTMLButtonElement>(null);
+  const servicesToggle = useRef<HTMLButtonElement>(null);
+  const header = useRef<HTMLElement>(null);
   const path = usePathname();
-  return <header className="header"><div className="shell header-inner">
-    <Link href="/" className="brand" onClick={() => setOpen(false)} aria-label={`${firm.name} home`}><span className="monogram" aria-hidden="true">J<span>&</span>C</span><span className="brand-name">{firm.name}<small>{firm.designation}</small></span></Link>
-    <button className="menu-toggle" aria-expanded={open} aria-controls="navigation" aria-label={open ? 'Close navigation' : 'Open navigation'} onClick={() => setOpen(!open)}>{open ? <X/> : <Menu/>}</button>
-    <nav id="navigation" className={open ? 'navigation is-open' : 'navigation'} aria-label="Main navigation">
-      <Link href="/" aria-current={path === '/' ? 'page' : undefined} onClick={() => setOpen(false)}>Home</Link>
-      <Link href="/services/" aria-current={path.startsWith('/services') ? 'page' : undefined} onClick={() => setOpen(false)}>Our services</Link>
-      <Link href="/#engagement" onClick={() => setOpen(false)}>Engagement approach</Link>
-      <Link className="nav-cta" href="/services/" onClick={() => setOpen(false)}>Explore our practice <ArrowUpRight size={16}/></Link>
+  const close = () => { setOpen(false); setServicesOpen(false); };
+  useEffect(() => {
+    const onPointer = (event: PointerEvent) => { if (!header.current?.contains(event.target as Node)) { setOpen(false); setServicesOpen(false); } };
+    const query = window.matchMedia('(min-width: 1100px)');
+    const reset = () => { setOpen(false); setServicesOpen(false); };
+    document.addEventListener('pointerdown', onPointer); query.addEventListener('change', reset);
+    return () => { document.removeEventListener('pointerdown', onPointer); query.removeEventListener('change', reset); };
+  }, []);
+  const current = (href: string) => href === '/' ? path === '/' : path.startsWith(href.replace(/\/$/, ''));
+  return <header className="header" ref={header} onKeyDown={event => { if (event.key === 'Escape') { if (servicesOpen) { setServicesOpen(false); servicesToggle.current?.focus(); } else if (open) { setOpen(false); toggle.current?.focus(); } } }} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) close(); }}><div className="shell header-inner">
+    <Link href="/" className="brand" onClick={close} aria-label={`${firm.name}, home`}><span className="brand-name">{firm.name}<small>{firm.designation}</small></span></Link>
+    <button ref={toggle} className="menu-toggle" aria-expanded={open} aria-controls="navigation" aria-label={open ? 'Close navigation' : 'Open navigation'} onClick={() => { setOpen(!open); setServicesOpen(false); }}>{open ? <X aria-hidden="true"/> : <Menu aria-hidden="true"/>}</button>
+    <nav id="navigation" className={`navigation${open ? ' is-open' : ''}`} aria-label="Main navigation">
+      {navigation.map(item => item.href === '/services/' ? <div className="services-disclosure" key={item.href}><div className="services-nav-label"><Link href={item.href} aria-current={current(item.href) ? 'page' : undefined} onClick={close}>{item.label}</Link><button ref={servicesToggle} className="services-toggle" aria-label="Browse service categories" aria-expanded={servicesOpen} aria-controls="services-navigation" onClick={() => setServicesOpen(!servicesOpen)}><ChevronDown size={16} aria-hidden="true"/></button></div><div className="services-dropdown" id="services-navigation" hidden={!servicesOpen}><p className="eyebrow">Areas of practice</p><ul>{services.map(service => <li key={service.slug}><Link href={`/services/${service.slug}/`} onClick={close}>{service.title}</Link></li>)}</ul></div></div> : <Link key={item.href} href={item.href} aria-current={current(item.href) ? 'page' : undefined} onClick={close}>{item.label}</Link>)}
+      <ButtonLink className="nav-cta" href="/contact/" onClick={close}>Discuss Your Requirements</ButtonLink>
     </nav>
   </div></header>;
 }

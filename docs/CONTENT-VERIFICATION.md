@@ -41,3 +41,14 @@ The supplied reference was https://jayavardhanco.com. The browser retrieval serv
 - [x] No visible placeholders for missing information.
 
 Before launch, resolve factual items that will actually be published; keep other unconfirmed facts omitted. Record approver, evidence and review date for each new claim.
+
+## Confirmed contact update — 13 September 2026
+
+The user directly confirmed the following for public use:
+- CA Anumula Jayavardhan Rao; designation: Chartered Accountant.
+- Firm name: Jayavardhan & Co.
+- Phone: +91 87667 28514.
+- Email: info@cajvr.com.
+- Address: 703, Manjeera Trinity Corporate, KPHB, Hyderabad - 500 072.
+
+These facts now appear on About/Contact and in the footer as appropriate. The professional's partner/proprietor status, membership number, biography, office hours and any additional qualifications remain unconfirmed and omitted. This update resolves only the matching identity and contact fields above, not all items in the earlier checklist.

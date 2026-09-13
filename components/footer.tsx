@@ -1,0 +1,7 @@
+import Link from 'next/link';
+import { contact, firm, navigation, services } from '@/lib/content';
+export function ContactDetails() {
+  if (!contact.email && !contact.phone && !contact.address) return null;
+  return <address className="contact-details">{contact.email && <a href={`mailto:${contact.email}`}>{contact.email}</a>}{contact.phone && <a href={contact.phone.href}>{contact.phone.display}</a>}{contact.address && <p>{contact.address}</p>}</address>;
+}
+export function Footer() { return <footer className="footer"><div className="shell footer-grid"><div className="footer-identity"><Link href="/" className="footer-brand">{firm.name}</Link><p className="footer-designation">{firm.designation}</p><p>Audit, tax, compliance and business advisory. A financial perspective for the decisions ahead.</p><ContactDetails/></div><nav aria-label="Footer services" className="footer-services"><h2>Areas of practice</h2><ul>{services.map(service => <li key={service.slug}><Link href={`/services/${service.slug}/`}>{service.title}</Link></li>)}</ul></nav><nav aria-label="Footer navigation"><h2>Explore</h2><ul>{navigation.map(item => <li key={item.href}><Link href={item.href}>{item.label}</Link></li>)}</ul></nav></div><div className="shell footer-bottom"><span>© {new Date().getFullYear()} {firm.name}</span><span>Information on this website is general and is not professional advice.</span></div></footer>; }

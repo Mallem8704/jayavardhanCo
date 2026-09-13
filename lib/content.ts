@@ -29,3 +29,9 @@ export const engagement = {
   title: 'The right scope comes first.',
   description: 'Services are subject to an agreed scope, engagement acceptance and applicable professional requirements. Where audit and advisory work intersect, independence requirements may limit the services that can be undertaken.',
 } as const;
+
+export const navigation = [{ label: 'Home', href: '/' }, { label: 'About', href: '/about/' }, { label: 'Services', href: '/services/' }, { label: 'Contact', href: '/contact/' }] as const;
+export type VerifiedContact = { email?: string; phone?: { display: string; href: `tel:${string}` }; address?: string };
+// Confirmed directly by the user, 13 September 2026.
+export const contact: VerifiedContact = { email: 'info@cajvr.com', phone: { display: '+91 87667 28514', href: 'tel:+918766728514' }, address: '703, Manjeera Trinity Corporate, KPHB, Hyderabad - 500 072.' };
+export const professional = { name: 'CA Anumula Jayavardhan Rao', designation: 'Chartered Accountant' } as const;

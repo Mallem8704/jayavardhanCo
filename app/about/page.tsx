@@ -1,0 +1,6 @@
+import type { Metadata } from 'next';
+import { Breadcrumbs, SectionHeading, ButtonLink, TextLink } from '@/components/ui';
+import { EngagementNote } from '@/components/engagement-note';
+import { firm, professional } from '@/lib/content';
+export const metadata: Metadata = { title: 'About', description: 'Learn about Jayavardhan & Co and CA Anumula Jayavardhan Rao.' };
+export default function About() { return <main id="main" tabIndex={-1}><section className="page-intro"><div className="shell"><Breadcrumbs items={[{ label: 'About' }]}/><SectionHeading as="h1" eyebrow="About the firm" title={firm.name} description="Chartered Accountants. Audit, tax, compliance and business advisory."/></div></section><section className="section shell detail-grid"><div><SectionHeading eyebrow="A financial perspective" title="Context before conclusions."/><p className="detail-copy">Every professional engagement begins with a question and a set of circumstances. Understanding both is the starting point for defining the work.</p><div className="professional"><h2>{professional.name}</h2><p>{professional.designation}</p></div><TextLink href="/services/">View all services</TextLink></div><div><EngagementNote/><ButtonLink href="/contact/">Discuss Your Requirements</ButtonLink></div></section></main>; }

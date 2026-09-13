@@ -1,2 +1,2 @@
-import Link from 'next/link';
-export default function NotFound() { return <main id="main" className="shell section"><p className="eyebrow">Page not found</p><h1>Let’s find your way back.</h1><p>The page you requested is unavailable.</p><Link className="button" href="/">Return home</Link></main>; }
+import { ButtonLink, SectionHeading } from '@/components/ui';
+export default function NotFound() { return <main id="main" tabIndex={-1} className="shell section"><SectionHeading as="h1" eyebrow="Page not found" title="Let’s find your way back." description="The page you requested is unavailable."/><ButtonLink href="/">Return home</ButtonLink></main>; }
