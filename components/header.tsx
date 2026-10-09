@@ -64,19 +64,16 @@ export function Header() {
             className="flex items-center gap-3 py-2 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#082C24] rounded"
             aria-label={`${firm.name}, Home`}
           >
-            <span
-              className={`relative block w-9 sm:w-11 aspect-[420/318] overflow-hidden flex-shrink-0 transition-opacity ${
-                isTransparent ? 'brightness-125' : 'mix-blend-multiply opacity-90'
-              }`}
-            >
+            <span className="relative block w-9 sm:w-11 aspect-[420/316] flex-shrink-0">
               <Image
-                src="/ca-india.png"
-                width={1280}
-                height={905}
-                sizes="88px"
+                src={isTransparent ? '/ca-india-light.png' : '/ca-india-dark.png'}
+                width={420}
+                height={316}
+                sizes="48px"
                 alt="CA India Emblem"
                 loading="eager"
-                className="absolute w-[304%] max-w-none left-[-102%] top-[-90%]"
+                priority
+                className="w-full h-full object-contain"
               />
             </span>
             <span className="flex flex-col">
@@ -154,11 +151,11 @@ export function Header() {
               href="/contact/"
               className={`px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide transition-all shadow-sm ${
                 isTransparent
-                  ? 'bg-[#F5F1E8] text-[#082C24] hover:bg-white hover:shadow-md'
-                  : 'bg-[#082C24] text-[#F5F1E8] hover:bg-[#051D18]'
+                  ? 'btn-ivory hover:shadow-md'
+                  : 'btn-forest'
               }`}
             >
-              Discuss Your Requirements
+              <span>Discuss Your Requirements</span>
             </Link>
           </nav>
 
@@ -277,10 +274,10 @@ export function Header() {
             <Link
               href="/contact/"
               onClick={closeMenu}
-              className="w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl bg-[#F5F1E8] text-[#082C24] font-semibold text-sm tracking-wide shadow-lg hover:bg-white transition-all active:scale-[0.98]"
+              className="btn-ivory w-full flex items-center justify-center gap-2 py-4 px-6 rounded-xl font-semibold text-sm tracking-wide shadow-lg transition-all active:scale-[0.98]"
             >
-              <span>Discuss Your Requirements</span>
-              <ArrowUpRight size={18} />
+              <span className="text-[#082C24]">Discuss Your Requirements</span>
+              <ArrowUpRight size={18} className="text-[#082C24]" />
             </Link>
           </div>
         </div>

@@ -157,10 +157,10 @@ export function DecisionInterface() {
             <div className="flex flex-wrap items-center gap-3">
               <Link
                 href={`/services/${selected.slug}/`}
-                className="min-h-[48px] px-6 py-3 rounded-xl bg-[#082C24] text-[#F5F1E8] font-semibold text-xs tracking-wider uppercase hover:bg-[#051D18] flex items-center gap-2 shadow-sm transition-colors"
+                className="btn-forest min-h-[48px] px-6 py-3 rounded-xl font-semibold text-xs tracking-wider uppercase flex items-center gap-2 shadow-sm transition-colors"
               >
-                <span>Explore {activeService?.shortTitle || 'Service'}</span>
-                <ArrowRight size={14} />
+                <span className="text-[#F5F1E8]">Explore {activeService?.shortTitle || 'Service'}</span>
+                <ArrowRight size={14} className="text-[#F5F1E8]" />
               </Link>
 
               <Link

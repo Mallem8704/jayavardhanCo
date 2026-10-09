@@ -56,10 +56,10 @@ export function StartupAdvisoryFeature() {
 
           <Link
             href="/services/startup-advisory/"
-            className="self-start lg:self-end min-h-[50px] px-7 py-3 rounded-xl bg-[#082C24] text-[#F5F1E8] font-semibold text-xs tracking-wider uppercase hover:bg-[#051D18] flex items-center gap-2 shadow-md transition-all"
+            className="btn-forest self-start lg:self-end min-h-[50px] px-7 py-3 rounded-xl font-semibold text-xs tracking-wider uppercase flex items-center gap-2 shadow-md transition-all"
           >
-            <span>Explore Startup Advisory</span>
-            <ArrowRight size={15} />
+            <span className="text-[#F5F1E8]">Explore Startup Advisory</span>
+            <ArrowRight size={15} className="text-[#F5F1E8]" />
           </Link>
         </div>
 

@@ -53,11 +53,11 @@ export function FloatingContactBar() {
         {/* Enquire Button */}
         <Link
           href="/contact/"
-          className="flex-1 flex items-center justify-center gap-1 min-h-[46px] rounded-full text-xs font-bold text-[#051D18] bg-[#F5F1E8] hover:bg-white active:bg-[#E8E0D1] transition-colors shadow-sm"
+          className="btn-ivory flex-1 flex items-center justify-center gap-1 min-h-[46px] rounded-full text-xs font-bold transition-colors shadow-sm"
           aria-label="Enquire via form"
         >
-          <span>ENQUIRE</span>
-          <ArrowUpRight size={14} aria-hidden="true" />
+          <span className="text-[#082C24]">ENQUIRE</span>
+          <ArrowUpRight size={14} className="text-[#082C24]" aria-hidden="true" />
         </Link>
       </div>
     </aside>

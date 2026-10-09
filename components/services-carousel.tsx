@@ -234,10 +234,10 @@ export function ServicesCarousel() {
               <Link
                 href={`/contact/?service=${activeSheet.slug}`}
                 onClick={() => setActiveSheet(null)}
-                className="w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-[#082C24] text-[#F5F1E8] font-semibold text-xs tracking-wider uppercase hover:bg-[#051D18] transition-colors"
+                className="btn-forest w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl font-semibold text-xs tracking-wider uppercase transition-colors"
               >
-                <span>Speak with us</span>
-                <ArrowUpRight size={16} />
+                <span className="text-[#F5F1E8]">Speak with us</span>
+                <ArrowUpRight size={16} className="text-[#F5F1E8]" />
               </Link>
               <Link
                 href={`/services/${activeSheet.slug}/`}

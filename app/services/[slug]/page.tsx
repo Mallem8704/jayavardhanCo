@@ -110,10 +110,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="pt-8 flex flex-wrap gap-4">
             <Link
               href={`/contact/?service=${service.slug}`}
-              className="min-h-[50px] px-8 py-3.5 rounded-xl bg-[#F5F1E8] text-[#082C24] font-semibold text-xs tracking-wider uppercase hover:bg-white flex items-center gap-2 shadow-lg transition-all"
+              className="btn-ivory min-h-[50px] px-8 py-3.5 rounded-xl font-semibold text-xs tracking-wider uppercase flex items-center gap-2 shadow-lg transition-all"
             >
-              <span>Discuss Your Requirements</span>
-              <ArrowUpRight size={16} />
+              <span className="text-[#082C24]">Discuss Your Requirements</span>
+              <ArrowUpRight size={16} className="text-[#082C24]" />
             </Link>
           </div>
         </div>
@@ -221,10 +221,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </p>
               <Link
                 href={`/contact/?service=${service.slug}`}
-                className="w-full flex items-center justify-center gap-2 py-3 px-5 rounded-xl bg-[#082C24] text-[#F5F1E8] font-semibold text-xs tracking-wider uppercase hover:bg-[#051D18] transition-colors"
+                className="btn-forest w-full flex items-center justify-center gap-2 py-3 px-5 rounded-xl font-semibold text-xs tracking-wider uppercase transition-colors"
               >
-                <span>Discuss Your Requirements</span>
-                <ArrowUpRight size={15} />
+                <span className="text-[#F5F1E8]">Discuss Your Requirements</span>
+                <ArrowUpRight size={15} className="text-[#F5F1E8]" />
               </Link>
             </div>
 

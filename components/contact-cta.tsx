@@ -33,10 +33,10 @@ export function ContactCta() {
         <div className="w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
           <Link
             href="/contact/"
-            className="w-full sm:w-auto min-h-[52px] px-8 py-3.5 rounded-xl bg-[#F5F1E8] text-[#082C24] font-semibold text-sm tracking-wide flex items-center justify-center gap-2.5 shadow-xl hover:bg-white hover:-translate-y-0.5 active:translate-y-0 transition-all"
+            className="btn-ivory w-full sm:w-auto min-h-[52px] px-8 py-3.5 rounded-xl font-semibold text-sm tracking-wide flex items-center justify-center gap-2.5 shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all"
           >
-            <span>Discuss Your Requirements</span>
-            <ArrowUpRight size={18} />
+            <span className="text-[#082C24]">Discuss Your Requirements</span>
+            <ArrowUpRight size={18} className="text-[#082C24]" />
           </Link>
 
           <a

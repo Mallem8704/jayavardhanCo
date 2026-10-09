@@ -56,10 +56,10 @@ export function VirtualCfoFeature() {
 
           <Link
             href="/services/virtual-cfo-business-advisory/"
-            className="self-start lg:self-end min-h-[50px] px-7 py-3 rounded-xl bg-[#F5F1E8] text-[#051D18] font-semibold text-xs tracking-wider uppercase hover:bg-white flex items-center gap-2 shadow-lg transition-all"
+            className="btn-ivory self-start lg:self-end min-h-[50px] px-7 py-3 rounded-xl font-semibold text-xs tracking-wider uppercase flex items-center gap-2 shadow-lg transition-all"
           >
-            <span>Explore Virtual CFO</span>
-            <ArrowUpRight size={16} />
+            <span className="text-[#082C24]">Explore Virtual CFO</span>
+            <ArrowUpRight size={16} className="text-[#082C24]" />
           </Link>
         </div>
 
