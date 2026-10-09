@@ -1,24 +1,40 @@
 @import "tailwindcss";
 :root {
-  --navy: #14283F;
-  --ivory: #F7F5F0;
+  --forest-deep: #082C24;
+  --finance-dark: #051D18;
+  --ivory-warm: #F5F1E8;
+  --sand-soft: #E8E0D1;
+  --charcoal: #171A18;
+  --sage-muted: #9DAF9F;
+  --bronze-muted: #C5A880;
+
+  /* Legacy aliases seamlessly remapped to new brand system */
+  --navy: var(--forest-deep);
+  --ivory: var(--ivory-warm);
   --white: #FFFFFF;
-  --text: #283340;
-  --muted: #52606E;
-  --gold: #A08352;
-  --border: #DDDCD6;
-  --control-border: #74808B;
+  --text: var(--charcoal);
+  --muted: #53645A;
+  --gold: var(--bronze-muted);
+  --border: #DDD6C8;
+  --control-border: #7F8E84;
   --error: #9B2828;
-  --radius: 4px;
-  --duration: 180ms;
+  --radius: 6px;
+  --duration: 200ms;
   --shell: 1240px;
 }
 @theme inline {
-  --color-navy: var(--navy);
-  --color-ivory: var(--ivory);
-  --color-charcoal: var(--text);
-  --color-gold: var(--gold);
-  --color-border: var(--border);
+  --color-forest-deep: #082C24;
+  --color-finance-dark: #051D18;
+  --color-ivory-warm: #F5F1E8;
+  --color-sand-soft: #E8E0D1;
+  --color-charcoal: #171A18;
+  --color-sage-muted: #9DAF9F;
+  --color-bronze-muted: #C5A880;
+  --color-navy: #082C24;
+  --color-ivory: #F5F1E8;
+  --color-charcoal-text: #171A18;
+  --color-gold: #C5A880;
+  --color-border: #DDD6C8;
   --font-body: var(--font-sans);
   --font-heading: var(--font-serif);
 }
@@ -365,3 +381,151 @@ textarea.form-control { resize: vertical; min-height: 144px; }
   .brand-name { font-size: 20px; }
   .brand-name small { font-size: 9px; letter-spacing: 1px; }
 }
+
+/* ==========================================================================
+   MOBILE-FIRST FINANCIAL ADVISORY & IMMERSIVE UX SYSTEM
+   ========================================================================== */
+
+/* Hide scrollbars while preserving native gesture scrolling */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Credibility Marquee */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 45s linear infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee-slow {
+    animation: none;
+    transform: none;
+  }
+}
+
+/* Floating Persistent Mobile Contact Bar */
+.floating-mobile-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 45;
+  padding: 10px 16px;
+  padding-bottom: max(14px, env(safe-area-inset-bottom));
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  transition: transform 300ms cubic-bezier(0.16, 1, 0.3, 1), opacity 300ms ease;
+}
+.floating-mobile-bar.is-hidden {
+  transform: translateY(110%);
+  opacity: 0;
+}
+.floating-mobile-bar.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+.floating-mobile-bar-inner {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-width: 440px;
+  background: rgba(5, 29, 24, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(157, 175, 159, 0.25);
+  border-radius: 9999px;
+  padding: 6px;
+  box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(245, 241, 232, 0.06);
+}
+
+/* Service Carousel Card Snapping */
+.snap-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  gap: 16px;
+  padding-inline: max(16px, calc((100vw - 1240px) / 2));
+}
+.snap-card {
+  flex: 0 0 85vw;
+  max-width: 380px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+@media (min-width: 768px) {
+  .snap-card {
+    flex: 0 0 340px;
+    max-width: 340px;
+  }
+}
+
+/* Bottom Sheet Modal for Mobile Service Drilldown */
+.bottom-sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 29, 24, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 60;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 250ms ease;
+}
+.bottom-sheet-backdrop.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.bottom-sheet-content {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  max-height: 88svh;
+  background: var(--ivory-warm);
+  color: var(--charcoal);
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  box-shadow: 0 -20px 40px rgba(0, 0, 0, 0.35);
+  z-index: 61;
+  transform: translateY(105%);
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.bottom-sheet-content.is-open {
+  transform: translateY(0);
+}
+.bottom-sheet-handle {
+  width: 44px;
+  height: 5px;
+  border-radius: 9999px;
+  background: rgba(8, 44, 36, 0.2);
+  margin: 12px auto 8px;
+  flex-shrink: 0;
+}
+
+/* Ambient Ledger Grid Pattern */
+.bg-financial-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(245, 241, 232, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(245, 241, 232, 0.04) 1px, transparent 1px);
+}
+.bg-financial-grid-light {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(8, 44, 36, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(8, 44, 36, 0.05) 1px, transparent 1px);
+}
+
